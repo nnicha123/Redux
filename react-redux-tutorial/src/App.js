@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux'
-
+import Count from './Count';
+// Add num will change when we click buttons on the Count.js component because changing it changes the state in the reducer! no props passing needed!
+// So this solves problem of having to send data back to parent (App.js) when updated in child (Count.js)
 class App extends Component {
 
   addHistory = (e) => {
     e.preventDefault();
     this.props.addHistory({ type: "ADD_HISTORY", name: this.props.state.textName, email: this.props.state.textEmail })
   }
-  
+
   render() {
     return (
       <div className="App">
-        {this.props.data}
-        <button onClick={() => this.props.plus({ type: "INCREASE" })}>+</button>
-        <button onClick={() => this.props.minus({ type: "DECREASE" })}>-</button>
-        <button onClick={() => this.props.reset({ type: "RESET" })}>Reset</button>
+        <Count/>
+        
         <button onClick={() => this.props.addNum({ type: "ADD_NUM", num: this.props.data })}>addNum</button>
         <button onClick={() => this.props.addPerson({ type: "ADD_PERSON" })}>addPerson</button>
         <ul>
@@ -41,9 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    plus: (action) => dispatch(action),
-    minus: (action) => dispatch(action),
-    reset: (action) => dispatch(action),
+    
     addNum: (action) => dispatch(action),
     addPerson: (action) => dispatch(action),
     addHistory: (action) => dispatch(action),
