@@ -4,15 +4,12 @@ import './App.css';
 import { connect } from 'react-redux'
 
 class App extends Component {
-  state = {
-    name: '',
-    email: ''
-  }
+
   addHistory = (e) => {
     e.preventDefault();
-
     this.props.addHistory({ type: "ADD_HISTORY", name: this.props.state.textName, email: this.props.state.textEmail })
   }
+  
   render() {
     return (
       <div className="App">
